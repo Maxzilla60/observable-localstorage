@@ -19,6 +19,7 @@
 	"devDependencies": {
 		"parcel": "^1.12.3",
 		"tslint": "^5.20.0",
-		"typescript": "^3.6.3"
+		"typescript": "^3.6.3",
+		"@types/faker": "^4.1.6"
 	}
 }
