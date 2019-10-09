@@ -3,6 +3,8 @@ import { arraysMatch, getElementById as $ } from './util';
 import faker from 'faker';
 import { distinctUntilChanged } from 'rxjs/operators';
 
+let distinctEventValueCount = 0;
+
 $('doSomethingButton').addEventListener('click', () => {
 	const stuff: any[] = oLocalStorage.getLatestValue('stuff') as any[];
 	stuff.push(faker.company.companyName());
@@ -20,7 +22,7 @@ $('doSomethingUselessButton').addEventListener('click', () => {
 oLocalStorage.get('stuff')
 	.pipe(distinctUntilChanged(arraysMatch))
 	.subscribe((newValue) => {
-		console.log('ding!');
+		$('distinctCount').innerHTML = `${++distinctEventValueCount}`;
 		$('fullOutput').innerHTML = JSON.stringify(newValue);
 	});
 oLocalStorage.get('stuff')
