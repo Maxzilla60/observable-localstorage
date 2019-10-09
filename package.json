@@ -1,0 +1,24 @@
+{
+	"name": "observable-localstorage",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.ts",
+	"private": true,
+	"scripts": {
+		"start": "parcel index.html",
+		"build": "parcel build index.html",
+		"codenvy": "parcel index.html --host 0.0.0.0 --port 1337"
+	},
+	"keywords": [],
+	"author": "Maxime Orione",
+	"license": "GNU General Public License v3.0",
+	"dependencies": {
+		"rxjs": "^6.5.2",
+		"faker": "4.1.0"
+	},
+	"devDependencies": {
+		"parcel": "^1.12.3",
+		"tslint": "^5.20.0",
+		"typescript": "^3.6.3"
+	}
+}
