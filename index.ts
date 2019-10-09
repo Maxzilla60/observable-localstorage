@@ -24,13 +24,13 @@ oLocalStorage.set('stuff', ['kak']);
 oLocalStorage.get('stuff')
 	.pipe(distinctUntilChanged(arraysMatch))
 	.subscribe((newValue) => {
-		$('distinctCount').innerHTML = `${++distinctEventValueCount}`;
-		$('fullOutput').innerHTML = JSON.stringify(newValue);
+		$('distinctCount').innerText = `${++distinctEventValueCount}`;
+		$('fullOutput').innerText = JSON.stringify(newValue);
 	});
 
 oLocalStorage.get('stuff')
 	.subscribe((newValue) => {
 		const filteredValue = (newValue as any[]).filter(v => typeof v === 'number');
-		$('numbersOutput').innerHTML = JSON.stringify(filteredValue);
+		$('numbersOutput').innerText = JSON.stringify(filteredValue);
 	});
 
