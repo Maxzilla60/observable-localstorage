@@ -1,6 +1,6 @@
 import { tryJsonParse } from './util';
 import { fromEvent, Observable } from 'rxjs';
-import { filter, map, pluck } from 'rxjs/operators';
+import { filter, map, pluck, startWith } from 'rxjs/operators';
 
 class OLocalStorage {
 	private static storageEventObservable: Observable<StorageEvent> =
@@ -25,7 +25,8 @@ class OLocalStorage {
 		return OLocalStorage.storageEventObservable.pipe(
 			filter((event: StorageEvent) => event.key === key),
 			pluck('newValue'),
-			map(tryJsonParse)
+			map(tryJsonParse),
+			startWith(this.getLatestValue(key)),
 		);
 	}
 
