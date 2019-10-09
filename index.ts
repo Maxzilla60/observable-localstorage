@@ -1,18 +1,7 @@
 import oLocalStorage from './olocalstorage';
+import { arraysMatch, getElementById as $ } from './util';
 import faker from 'faker';
 import { distinctUntilChanged } from 'rxjs/operators';
-
-const $ = (id) => document.getElementById(id);
-const arraysMatch = function (arr1, arr2) {
-	// Check if the arrays are the same length
-	if (arr1.length !== arr2.length) { return false; }
-	// Check if all items exist and are in the same order
-	for (let i = 0; i < arr1.length; i++) {
-		if (arr1[i] !== arr2[i]) { return false; }
-	}
-	// Otherwise, return true
-	return true;
-};
 
 $('doSomethingButton').addEventListener('click', () => {
 	const stuff: any[] = oLocalStorage.getLatestValue('stuff') as any[];

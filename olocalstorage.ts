@@ -1,3 +1,4 @@
+import { tryJsonParse } from './util';
 import { fromEvent, Observable } from 'rxjs';
 import { filter, map, pluck } from 'rxjs/operators';
 
@@ -29,11 +30,6 @@ class OLocalStorage {
 	public getLatestValue(key: string): any {
 		return tryJsonParse(window.localStorage.getItem(key));
 	}
-}
-
-function tryJsonParse(value: string): any {
-	try { value = JSON.parse(value); } catch (e) { }
-	return value;
 }
 
 const oLocalStorage = new OLocalStorage();
