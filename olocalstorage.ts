@@ -6,6 +6,9 @@ class OLocalStorage {
 		try { newValue = JSON.stringify(newValue); } catch (e) { }
 		window.localStorage.setItem(key, newValue);
 
+		// StorageEvent must be triggered manually
+		// apparently StorageEvent only triggers if
+		// the localStorage is updated from a different tab/page/host
 		window.dispatchEvent(new StorageEvent('storage', {
 			key,
 			// oldValue?
