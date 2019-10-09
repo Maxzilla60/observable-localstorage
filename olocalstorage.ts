@@ -3,12 +3,13 @@ import { filter, map, pluck } from 'rxjs/operators';
 
 class OLocalStorage {
 	public set(key: string, newValue: any): void {
-		let value = newValue;
-		try { value = JSON.stringify(newValue); } catch (e) { }
-		window.localStorage.setItem(key, value);
+		try { newValue = JSON.stringify(newValue); } catch (e) { }
+		window.localStorage.setItem(key, newValue);
+
 		window.dispatchEvent(new StorageEvent('storage', {
 			key,
-			newValue: value,
+			// oldValue?
+			newValue,
 			storageArea: localStorage,
 		}));
 	}
@@ -18,20 +19,18 @@ class OLocalStorage {
 			filter((event: StorageEvent) => event.storageArea === localStorage),
 			filter((event: StorageEvent) => event.key === key),
 			pluck('newValue'),
-			// tap(console.log),
-			map((newValue: string) => {
-				let value = newValue;
-				try { value = JSON.parse(value); } catch (e) { }
-				return value;
-			})
+			map(tryJsonParse)
 		);
 	}
 
 	public getLatestValue(key: string): any {
-		let value = window.localStorage.getItem(key);
-		try { value = JSON.parse(value); } catch (e) { }
-		return value;
+		return tryJsonParse(window.localStorage.getItem(key));
 	}
+}
+
+function tryJsonParse(value: string): any {
+	try { value = JSON.parse(value); } catch (e) { }
+	return value;
 }
 
 const oLocalStorage = new OLocalStorage();
