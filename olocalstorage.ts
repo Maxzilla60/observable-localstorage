@@ -3,6 +3,9 @@ import { fromEvent, Observable } from 'rxjs';
 import { filter, map, pluck } from 'rxjs/operators';
 
 class OLocalStorage {
+	private static storageEventObservable: Observable<StorageEvent> =
+		fromEvent(window, 'storage').pipe(filter((event: StorageEvent) => event.storageArea === localStorage));
+
 	public set(key: string, newValue: any): void {
 		try { newValue = JSON.stringify(newValue); } catch (e) { }
 		window.localStorage.setItem(key, newValue);
@@ -19,8 +22,7 @@ class OLocalStorage {
 	}
 
 	public get(key: string): Observable<any> {
-		return fromEvent(window, 'storage').pipe(
-			filter((event: StorageEvent) => event.storageArea === localStorage),
+		return OLocalStorage.storageEventObservable.pipe(
 			filter((event: StorageEvent) => event.key === key),
 			pluck('newValue'),
 			map(tryJsonParse)
