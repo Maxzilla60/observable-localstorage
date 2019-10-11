@@ -19,18 +19,18 @@ $('doSomethingUselessButton').addEventListener('click', () => {
 	oLocalStorage.set('stuff', oLocalStorage.getLatestValue('stuff'));
 });
 
-oLocalStorage.set('stuff', ['kak']);
+oLocalStorage.set('stuff', ['Initial value']);
 
 oLocalStorage.get('stuff')
 	.pipe(distinctUntilChanged(arraysMatch))
 	.subscribe((newValue) => {
 		$('distinctCount').innerText = `${++distinctEventValueCount}`;
-		$('fullOutput').innerText = JSON.stringify(newValue);
+		$('fullOutput').innerText = JSON.stringify(newValue, null, 2);
 	});
 
 oLocalStorage.get('stuff')
 	.subscribe((newValue) => {
 		const filteredValue = (newValue as any[]).filter(v => typeof v === 'number');
-		$('numbersOutput').innerText = JSON.stringify(filteredValue);
+		$('numbersOutput').innerText = JSON.stringify(filteredValue, null, 2);
 	});
 
