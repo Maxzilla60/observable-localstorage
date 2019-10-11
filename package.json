@@ -13,8 +13,9 @@
 	"author": "Maxime Orione",
 	"license": "GNU General Public License v3.0",
 	"dependencies": {
+		"faker": "4.1.0",
 		"rxjs": "^6.5.2",
-		"faker": "4.1.0"
+		"tacit-css": "^1.5.1"
 	},
 	"devDependencies": {
 		"parcel": "^1.12.3",
