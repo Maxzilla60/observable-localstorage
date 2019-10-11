@@ -13,11 +13,11 @@
 	"author": "Maxime Orione",
 	"license": "GNU General Public License v3.0",
 	"dependencies": {
-		"faker": "4.1.0",
-		"rxjs": "^6.5.2",
-		"tacit-css": "^1.5.1"
+		"rxjs": "^6.5.2"
 	},
 	"devDependencies": {
+		"faker": "4.1.0",
+		"tacit-css": "^1.5.1",
 		"parcel": "^1.12.3",
 		"tslint": "^5.20.0",
 		"typescript": "^3.6.3",
