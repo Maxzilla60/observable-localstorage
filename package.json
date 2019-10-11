@@ -1,15 +1,19 @@
 {
 	"name": "observable-localstorage",
 	"version": "1.0.0",
-	"description": "",
-	"main": "index.ts",
+	"description": "Use the browser's LocalStorage as an RxJS Observable",
+	"main": "olocalstorage.ts",
 	"private": true,
 	"scripts": {
 		"start": "parcel index.html",
 		"build": "parcel build index.html",
 		"codenvy": "parcel index.html --host 0.0.0.0 --port 1337"
 	},
-	"keywords": [],
+	"keywords": [
+		"localstorage",
+		"rxjs",
+		"observable"
+	],
 	"author": "Maxime Orione",
 	"license": "GNU General Public License v3.0",
 	"dependencies": {
