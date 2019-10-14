@@ -6,16 +6,13 @@ class OLocalStorage {
 		fromEvent(window, 'storage').pipe(filter((event: StorageEvent) => event.storageArea === localStorage));
 
 	public set(key: string, newValue: any): void {
+		const oldValue = this.getLatestValue(key);
 		try { newValue = JSON.stringify(newValue); } catch (e) { }
 		window.localStorage.setItem(key, newValue);
-
 		// StorageEvent must be triggered manually
-		// apparently StorageEvent only triggers if
-		// the localStorage is updated from a different tab/page/host
+		// apparently StorageEvent only triggers if the localStorage is updated from a different tab/page/host
 		window.dispatchEvent(new StorageEvent('storage', {
-			key,
-			// oldValue?
-			newValue,
+			key, oldValue, newValue,
 			storageArea: localStorage,
 		}));
 	}
