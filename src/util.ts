@@ -13,8 +13,3 @@ export function arraysMatch(arr1: any[], arr2: any[]): boolean {
 	// Otherwise, return true
 	return true;
 }
-
-export function tryJsonParse(value: string): any {
-	try { value = JSON.parse(value); } catch (e) { }
-	return value;
-}
