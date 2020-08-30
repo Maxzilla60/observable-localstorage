@@ -8,6 +8,9 @@
 		"build": "tsc",
 		"prepublish": "tsc"
 	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/"
+	},
 	"dependencies": {
 		"rxjs": "^6.6.2"
 	},
