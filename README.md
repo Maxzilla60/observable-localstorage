@@ -5,7 +5,7 @@ A simple module that provides subscribing to changes in LocalStorage as an RxJS 
 # Installing
 
 ```bash
-npm install @maxzilla60/observable-localstorage@0.1.0 --registry=https://npm.pkg.github.com/
+npm install @maxzilla60/observable-localstorage --registry=https://npm.pkg.github.com/
 ```
 
 # Usage
