@@ -2,9 +2,11 @@
 	"name": "observable-localstorage",
 	"version": "0.1.0",
 	"description": "Use the browser's LocalStorage as an RxJS Observable",
-	"main": "index.js",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"scripts": {
-		"build": "tsc"
+		"build": "tsc",
+		"prepublish": "tsc"
 	},
 	"dependencies": {
 		"rxjs": "^6.6.2"
