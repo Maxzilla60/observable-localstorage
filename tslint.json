@@ -30,17 +30,6 @@
 			140
 		],
 		"member-access": true,
-		"member-ordering": [
-			true,
-			{
-				"order": [
-					"static-field",
-					"instance-field",
-					"static-method",
-					"instance-method"
-				]
-			}
-		],
 		"no-consecutive-blank-lines": false,
 		"no-console": [
 			true,
@@ -65,10 +54,15 @@
 			"as-needed"
 		],
 		"object-literal-sort-keys": false,
+		"only-arrow-functions": false,
 		"ordered-imports": false,
 		"quotemark": [
 			true,
 			"single"
+		],
+		"space-before-function-paren": [
+			false,
+			"always"
 		],
 		"trailing-comma": false,
 		"typedef": [

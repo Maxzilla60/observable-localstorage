@@ -1,13 +1,22 @@
 {
 	"name": "observable-localstorage",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"description": "Use the browser's LocalStorage as an RxJS Observable",
-	"main": "olocalstorage.ts",
-	"private": true,
+	"main": "index.js",
 	"scripts": {
-		"start": "parcel index.html",
-		"build": "parcel build index.html",
-		"codenvy": "parcel index.html --host 0.0.0.0 --port 1337"
+		"build": "tsc"
+	},
+	"dependencies": {
+		"rxjs": "^6.6.2"
+	},
+	"devDependencies": {
+		"@types/node": "^14.6.2",
+		"tsc": "^1.20150623.0",
+		"typescript": "^4.0.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Maxzilla60/observable-localstorage.git"
 	},
 	"keywords": [
 		"localstorage",
@@ -16,15 +25,8 @@
 	],
 	"author": "Maxime Orione",
 	"license": "GNU General Public License v3.0",
-	"dependencies": {
-		"rxjs": "^6.5.2"
+	"bugs": {
+		"url": "https://github.com/Maxzilla60/observable-localstorage/issues"
 	},
-	"devDependencies": {
-		"faker": "4.1.0",
-		"tacit-css": "^1.5.1",
-		"parcel": "^1.12.3",
-		"tslint": "^5.20.0",
-		"typescript": "^3.6.3",
-		"@types/faker": "^4.1.6"
-	}
+	"homepage": "https://github.com/Maxzilla60/observable-localstorage#readme"
 }

@@ -1,36 +1,43 @@
-import oLocalStorage from './olocalstorage';
-import { arraysMatch, getElementById as $ } from './util';
-import faker from 'faker';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { fromEvent, Observable } from 'rxjs';
+import { filter, map, pluck, startWith } from 'rxjs/operators';
 
-let distinctEventValueCount = 0;
+class ObservableLocalStorage {
+	private static storageEventObservable: Observable<StorageEvent> =
+		(fromEvent(window, 'storage') as Observable<StorageEvent>)
+			.pipe(filter((event: StorageEvent) => event.storageArea === localStorage));
 
-$('doSomethingButton').addEventListener('click', () => {
-	const stuff: any[] = oLocalStorage.getLatestValue('stuff') as any[];
-	stuff.push(faker.company.companyName());
-	oLocalStorage.set('stuff', stuff);
-});
-$('doSomethingElseButton').addEventListener('click', () => {
-	const stuff: any[] = oLocalStorage.getLatestValue('stuff') as any[];
-	stuff.push(123);
-	oLocalStorage.set('stuff', stuff);
-});
-$('doSomethingUselessButton').addEventListener('click', () => {
-	oLocalStorage.set('stuff', oLocalStorage.getLatestValue('stuff'));
-});
+	public set(key: string, newValue: any): void {
+		const oldValue = this.getLatestValue(key);
+		try { newValue = JSON.stringify(newValue); } catch (e) { }
+		window.localStorage.setItem(key, newValue);
+		// StorageEvent must be triggered manually
+		// apparently StorageEvent only triggers if the localStorage is updated from a different tab/page/host
+		window.dispatchEvent(new StorageEvent('storage', {
+			key, oldValue, newValue,
+			storageArea: localStorage,
+		}));
+	}
 
-oLocalStorage.set('stuff', ['Initial value']);
+	public get(key: string): Observable<any> {
+		return ObservableLocalStorage.storageEventObservable.pipe(
+			filter((event: StorageEvent) => event.key === key),
+			pluck('newValue'),
+			map(tryJsonParse),
+			startWith(this.getLatestValue(key)),
+		);
+	}
 
-oLocalStorage.get('stuff')
-	.pipe(distinctUntilChanged(arraysMatch))
-	.subscribe((newValue) => {
-		$('distinctCount').innerText = `${++distinctEventValueCount}`;
-		$('fullOutput').innerText = JSON.stringify(newValue, null, 2);
-	});
+	public getLatestValue(key: string): any {
+		return tryJsonParse(window.localStorage.getItem(key));
+	}
+}
 
-oLocalStorage.get('stuff')
-	.subscribe((newValue) => {
-		const filteredValue = (newValue as any[]).filter(v => typeof v === 'number');
-		$('numbersOutput').innerText = JSON.stringify(filteredValue, null, 2);
-	});
+function tryJsonParse(value: string | null): any {
+	if (value) {
+		try { value = JSON.parse(value); } catch (e) { }
+	}
+	return value;
+}
 
+const oLocalStorage = new ObservableLocalStorage();
+export default oLocalStorage;
