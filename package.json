@@ -1,12 +1,12 @@
 {
-	"name": "observable-localstorage",
+	"name": "@maxzilla60/observable-localstorage",
 	"version": "0.1.0",
 	"description": "Use the browser's LocalStorage as an RxJS Observable",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
 		"build": "tsc",
-		"prepublish": "tsc"
+		"prepare": "tsc"
 	},
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/"
