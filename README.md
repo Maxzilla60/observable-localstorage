@@ -2,13 +2,13 @@
 
 A simple module that provides subscribing to changes in LocalStorage as an RxJS Observable.
 
-# Installing
+## Installing
 
 ```bash
 npm install @maxzilla60/observable-localstorage --registry=https://npm.pkg.github.com/
 ```
 
-# Usage
+## Usage
 
 The api is intentionally similar to LocalStorage's api, with a `set('key', value)` for updating and a `get('key')` for getting the observable instance.
 There is also a `getLatestValue('key')` which will return the current value of the key (not an observable).
